@@ -16,11 +16,10 @@ pipeline {
    
     stage('Test Agent') {
       steps {
-        sh 'touch new-folder/jenfile'
-        sh 'echo "Hello from Jenkins Agent!" >> new-folder/jenfile'
+        sh 'echo "Hello from Jenkins Agent!" > new-folder/jenfile'
         sh 'whoami >> new-folder/jenfile'
         sh 'hostname >> new-folder/jenfile'
-        sh 'java -version >> new-folder/jenfile'
+        sh 'java --version >> new-folder/jenfile'
       }
     }
     stage("Deploy") {
