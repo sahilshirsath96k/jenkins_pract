@@ -1,0 +1,16 @@
+pipeline {
+  agent {
+    label 'linux-agent'
+  }
+  stages {
+    stage ('Build') {
+      echo "Building"
+    }
+    stage ('Test') {
+      parallel {
+        stage('Unit') { steps { sh ' echo unit tests ' } }
+        stage('AB test') { steps { sh 'echo AB testing' } }
+      } 
+    }
+  }
+}
