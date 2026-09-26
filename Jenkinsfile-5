@@ -1,5 +1,7 @@
 pipeline {
-  agent any 
+  agent any {
+    label 'linux-agent'
+  }
   parameters {
     choice(name: 'ENVIRONMENT', choices: ['staging', 'production'], description: 'Target')
   }
