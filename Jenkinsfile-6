@@ -14,5 +14,15 @@ pipeline {
         stage('AB test') { steps { sh 'echo AB testing' } }
       } 
     }
+    stage ('Approve') {
+      steps {
+        input message: 'Deploy to production'
+      }
+    }
+    stage ('Deploy') {
+      steps {
+        echo "Deploying the Application"
+      }
+    }
   }
 }
