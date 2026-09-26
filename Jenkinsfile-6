@@ -2,10 +2,16 @@ pipeline {
   agent {
     label 'linux-agent'
   }
+  environment {
+    APP_NAME = 'demo'
+  }
   stages {
     stage ('Build') {
+      environment {
+        BUILD_MODE = 'production'
+      }
       steps {
-        echo "Building"
+        echo "Building app $APP_NAME mode $BUILD_MODE"
       }
     }
     stage ('Test') {
