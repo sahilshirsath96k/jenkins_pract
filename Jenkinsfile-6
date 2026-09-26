@@ -6,6 +6,11 @@ pipeline {
     APP_NAME = 'demo'
   }
   stages {
+    stage ('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
     stage ('Build') {
       environment {
         BUILD_MODE = 'production'
@@ -30,5 +35,13 @@ pipeline {
         echo "Deploying the Application"
       }
     }
+  post {
+    success {
+      echo 'Succeded' 
+    }
+    failure {
+      echo 'Failure occured'
+    }
+  }
   }
 }
