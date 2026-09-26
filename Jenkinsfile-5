@@ -6,6 +6,11 @@ pipeline {
     choice(name: 'ENVIRONMENT', choices: ['staging', 'production'], description: 'Target')
   }
   stages {
+    stage('Approve') {
+      steps {
+        input message: "Deploy to prodution"
+      }
+    }
     stage('Deploy') {
       steps {
         sh "echo Deploying to ${ params.ENVIRONMENT }"
@@ -16,6 +21,14 @@ pipeline {
         stage('Unit') { steps { sh 'echo Unit tests' } }
         stage('Integration') { steps { sh 'echo Integration tests' } }
       }
+    }
+  }
+  post {
+    success {
+      echo 'Pipeline Succeded'
+    }
+    failure {
+      echo 'Pipeline failed'
     }
   }
 }
